@@ -49,25 +49,25 @@
 </profile>
 </item>
 <item id="org.eclipse.cdt.core.pathentry">
+<pathentry kind="src" path=""/>
+<pathentry kind="out" path=""/>
+<pathentry kind="con" path="org.eclipse.cdt.make.core.DISCOVERED_SCANNER_INFO"/>
 <pathentry kind="inc" path="" include="C:/Program Files/Metrowerks/CW08 V3.1/lib/hc08c/include" system="true" exported="true"/>
 <pathentry kind="inc" path="" include="Source/include" system="true" base-path="FreeRTOS" exported="true"/>
 <pathentry kind="inc" path="" include="Demo/HCS08_CodeWarrior/CODE" system="true" base-path="FreeRTOS" exported="true"/>
 <pathentry kind="inc" path="" include="Demo/common/include" system="true" base-path="FreeRTOS" exported="true"/>
 <pathentry kind="inc" path="" include="Demo/HCS08_CodeWarrior" system="true" base-path="FreeRTOS"/>
-<pathentry kind="mac" path="" name="configUSE_PREEMPTION" value=""/>
-<pathentry kind="mac" path="" name="configUSE_IDLE_HOOK" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_vTaskPrioritySet" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_uxTaskPriorityGet" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_vTaskDelete" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_vTaskCleanUpResources" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_vTaskSuspend" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_vTaskDelayUntil" value=""/>
-<pathentry kind="mac" path="" name="INCLUDE_vTaskDelay" value=""/>
-<pathentry kind="mac" path="" name="configUSE_16_BIT_TICKS" value=""/>
-<pathentry kind="mac" path="" name="heapBYTE_ALIGNMENT_MASK" value=""/>
-<pathentry kind="src" path=""/>
-<pathentry kind="out" path=""/>
-<pathentry kind="con" path="org.eclipse.cdt.make.core.DISCOVERED_SCANNER_INFO"/>
+<pathentry kind="mac" path="" name="configUSE_PREEMPTION" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="configUSE_IDLE_HOOK" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_vTaskPrioritySet" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_uxTaskPriorityGet" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_vTaskDelete" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_vTaskCleanUpResources" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_vTaskSuspend" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_vTaskDelayUntil" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="INCLUDE_vTaskDelay" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="configUSE_16_BIT_TICKS" value="1" exported="true"/>
+<pathentry kind="mac" path="" name="heapBYTE_ALIGNMENT_MASK" value="1" exported="true"/>
 </item>
 <item id="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
