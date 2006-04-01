@@ -33,7 +33,7 @@
 /* Scheduler includes. */
 #include "FreeRTOS.h"
 #include "task.h"
-
+#include "TickTimer.h"
 
 /*-----------------------------------------------------------
  * Implementation of functions defined in portable.h for the HCS08 port.
@@ -207,8 +207,15 @@ void interrupt vPortYield( void )
  * being used then this simply increments the tick count.  If the 
  * preemptive scheduler is being used a context switch can occur.
  */
+#pragma NO_ENTRY 
+#pragma NO_EXIT 
+#pragma NO_FRAME 
+#pragma NO_RETURN
 void interrupt vPortTickInterrupt( void )
 {
+	// PE dispatches through an "event handler" which invokes JSR and other crap that mess up the stack.
+	__asm("AIS #4");
+	
 	#if configUSE_PREEMPTION == 1
 	{
 		/* A context switch might happen so save the context. */
@@ -220,8 +227,12 @@ void interrupt vPortTickInterrupt( void )
 		/* ... then see if the new tick value has necessitated a context switch. */
 		vTaskSwitchContext();
 
-		TPM2SC_TOF = 0;
-		TPM2C1SC_CH1F = 0;							   
+		// Reset the timer module.
+		TPM1SC_TOF = 0;
+		TPM1C0SC_CH0F = 0;
+			
+// Timer module is no longer part of the tick - now we use RTI.
+//		SRTISC_RTIACK = 1;						   
 
 		/* Restore the context of a task - which may be a different task to that interrupted. */
 		portRESTORE_CONTEXT();
