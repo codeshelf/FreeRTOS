@@ -150,7 +150,7 @@ void vPortEndScheduler( void )
 
 static void prvSetupTimerInterrupt( void )
 {
-	TickTimer_SetFreqHz( configTICK_RATE_HZ );
+	//TickTimer_SetFreqHz( configTICK_RATE_HZ );
 	TickTimer_Enable();
 }
 /*-----------------------------------------------------------*/
@@ -228,7 +228,7 @@ void interrupt vPortTickInterrupt( void )
 		vTaskSwitchContext();
 
 		// Reset the timer module.
-		TPM1SC_TOF = 0;
+		//TPM1SC_TOF = 0;
 		TPM1C0SC_CH0F = 0;
 			
 // Timer module is no longer part of the tick - now we use RTI.
