@@ -33,7 +33,8 @@
 /* Scheduler includes. */
 #include "FreeRTOS.h"
 #include "task.h"
-#include "TickTimer.h"
+//#include "TickTimer.h"
+#include "RTI1.h"
 
 /*-----------------------------------------------------------
  * Implementation of functions defined in portable.h for the HCS08 port.
@@ -151,7 +152,8 @@ void vPortEndScheduler( void )
 static void prvSetupTimerInterrupt( void )
 {
 	//TickTimer_SetFreqHz( configTICK_RATE_HZ );
-	TickTimer_Enable();
+	//TickTimer_Enable();
+	RTI1_Init();
 }
 /*-----------------------------------------------------------*/
 
@@ -229,10 +231,10 @@ void interrupt vPortTickInterrupt( void )
 
 		// Reset the timer module.
 		//TPM1SC_TOF = 0;
-		TPM1C0SC_CH0F = 0;
+		//TPM1C0SC_CH0F = 0;
 			
-// Timer module is no longer part of the tick - now we use RTI.
-//		SRTISC_RTIACK = 1;						   
+		// Timer module is no longer part of the tick - now we use RTI.
+		SRTISC_RTIACK = 1;						   
 
 		/* Restore the context of a task - which may be a different task to that interrupted. */
 		portRESTORE_CONTEXT();
