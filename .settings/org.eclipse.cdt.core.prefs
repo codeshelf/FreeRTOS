@@ -1,0 +1,5 @@
+#Tue Apr 03 09:41:13 PDT 2007
+eclipse.preferences.version=1
+indexer/indexAllFiles=true
+indexer/indexerId=org.eclipse.cdt.core.domsourceindexer
+indexerId=org.eclipse.cdt.core.domsourceindexer
