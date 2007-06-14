@@ -242,7 +242,7 @@ void interrupt vPortTickInterrupt( void )
 	#else
 	{
 		vTaskIncrementTick();
-		TPM1SC_TOF = 0;
+		//TPM1SC_TOF = 0;
 	}
 	#endif
 }
