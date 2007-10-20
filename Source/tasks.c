@@ -397,7 +397,7 @@ static volatile portBASE_TYPE xNumOfOverflows					= ( portBASE_TYPE ) 0;
  * once one tasks has been found whose timer has not expired we need not look
  * any further down the list.
  */
-#define prvCheckDelayedTasks()																						\
+static void prvCheckDelayedTasks()																						\
 {																													\
 register tskTCB *pxTCB;																								\
 																													\
