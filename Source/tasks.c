@@ -1485,6 +1485,9 @@ void vTaskSwitchContext( void )
 	while( listLIST_IS_EMPTY( &( pxReadyTasksLists[ uxTopReadyPriority ] ) ) )
 	{
 		--uxTopReadyPriority;
+		// JBW/GW - 13DEC07: Fix empty ready list bug.  We can't switch context, so return to the RTI dispatcher.
+		if (uxTopReadyPriority > configMAX_PRIORITIES)
+			return;
 	}
 
 	/* listGET_OWNER_OF_NEXT_ENTRY walks through the list, so the tasks of the
