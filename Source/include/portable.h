@@ -1,5 +1,5 @@
 /*
-	FreeRTOS.org V4.5.0 - Copyright (C) 2003-2007 Richard Barry.
+	FreeRTOS.org V5.1.1 - Copyright (C) 2003-2008 Richard Barry.
 
 	This file is part of the FreeRTOS.org distribution.
 
@@ -23,14 +23,28 @@
 	of http:www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
-	***************************************************************************
-	See http:www.FreeRTOS.org for documentation, latest information, license
-	and contact details.  Please ensure to read the configuration and relevant
-	port sections of the online documentation.
+    ***************************************************************************
+    ***************************************************************************
+    *                                                                         *
+    * SAVE TIME AND MONEY!  We can port FreeRTOS.org to your own hardware,    *
+    * and even write all or part of your application on your behalf.          *
+    * See http://www.OpenRTOS.com for details of the services we provide to   *
+    * expedite your project.                                                  *
+    *                                                                         *
+    ***************************************************************************
+    ***************************************************************************
 
-	Also see http://www.SafeRTOS.com for an IEC 61508 compliant version along
-	with commercial development and support options.
-	***************************************************************************
+	Please ensure to read the configuration and relevant port sections of the
+	online documentation.
+
+	http://www.FreeRTOS.org - Documentation, latest information, license and
+	contact details.
+
+	http://www.SafeRTOS.com - A version that is certified for use in safety
+	critical systems.
+
+	http://www.OpenRTOS.com - Commercial support, development, porting,
+	licensing and training services.
 */
 
 /*-----------------------------------------------------------
@@ -72,6 +86,10 @@
 	#include "..\..\source\portable\MPLAB\PIC18F\portmacro.h"
 #endif
 
+#ifdef MPLAB_PIC32MX_PORT
+	#include "..\..\Source\portable\MPLAB\PIC32MX\portmacro.h"
+#endif
+
 #ifdef _FEDPICC
 	#include "libFreeRTOS/Include/portmacro.h"
 #endif
@@ -92,6 +110,10 @@
 	#include "../../Source/portable/GCC/ARM7_LPC23xx/portmacro.h"
 #endif
 
+#ifdef IAR_MSP430
+	#include "..\..\Source\portable\IAR\MSP430\portmacro.h"
+#endif
+
 #ifdef GCC_MSP430
 	#include "../../Source/portable/GCC/MSP430F449/portmacro.h"
 #endif
@@ -100,8 +122,8 @@
 	#include "../../Source/portable/Rowley/MSP430F449/portmacro.h"
 #endif
 
-#ifdef KEIL_ARM7
-	#include "..\..\Source\portable\Keil\ARM7\portmacro.h"
+#ifdef ARM7_LPC21xx_KEIL_RVDS
+	#include "..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h"
 #endif
 
 #ifdef SAM7_GCC
@@ -123,7 +145,7 @@
 #ifdef STR75X_IAR
 	#include "..\..\Source\portable\IAR\STR75x\portmacro.h"
 #endif
-	
+
 #ifdef STR75X_GCC
 	#include "..\..\Source\portable\GCC\STR75x\portmacro.h"
 #endif
@@ -131,7 +153,7 @@
 #ifdef STR91X_IAR
 	#include "..\..\Source\portable\IAR\STR91x\portmacro.h"
 #endif
-	
+
 #ifdef GCC_H8S
 	#include "../../Source/portable/GCC/H8S2329/portmacro.h"
 #endif
@@ -148,6 +170,10 @@
 	#include "../../Source/portable/GCC/ARM_CM3/portmacro.h"
 #endif
 
+#ifdef GCC_ARMCM3
+	#include "../../Source/portable/GCC/ARM_CM3/portmacro.h"
+#endif
+
 #ifdef IAR_ARM_CM3
 	#include "../../Source/portable/IAR/ARM_CM3/portmacro.h"
 #endif
@@ -155,7 +181,7 @@
 #ifdef IAR_ARMCM3_LM
 	#include "../../Source/portable/IAR/ARM_CM3/portmacro.h"
 #endif
-	
+
 // JBW/GW - 07MAR06
 #ifdef __HC08__
 	#include "../../Source/portable/CodeWarrior/HCS08/portmacro.h"
@@ -163,7 +189,7 @@
 
 #ifdef HCS12_CODE_WARRIOR
 	#include "../../Source/portable/CodeWarrior/HCS12/portmacro.h"
-#endif	
+#endif
 
 #ifdef MICROBLAZE_GCC
 	#include "../../Source/portable/GCC/MicroBlaze/portmacro.h"
@@ -179,6 +205,26 @@
 
 #ifdef GCC_MCF5235
     #include "../../Source/portable/GCC/MCF5235/portmacro.h"
+#endif
+
+#ifdef COLDFIRE_V2_GCC
+	#include "../../../source/portable/GCC/ColdFire_V2/portmacro.h"
+#endif
+
+#ifdef COLDFIRE_V2_CODEWARRIOR
+	#include "../../Source/portable/CodeWarrior/ColdFire_V2/portmacro.h"
+#endif
+
+#ifdef GCC_PPC405
+	#include "../../Source/portable/GCC/PPC405_Xilinx/portmacro.h"
+#endif
+
+#ifdef MC1322X_GCC
+    #include "../../Source/portable/GCC/MC1322x/portmacro.h"
+#endif
+
+#ifdef MC1322X_IAR
+    #include "../../Source/portable/IAR/MC1322x/portmacro.h"
 #endif
 
 #ifdef BCC_INDUSTRIAL_PC_PORT
@@ -211,6 +257,17 @@
    #endif
 #endif
 
+#ifdef __91467D
+	#include "portmacro.h"
+#endif
+
+#ifdef __96340
+	#include "portmacro.h"
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*
  * Setup the stack of a new task so it is ready to be placed under the
  * scheduler control.  The registers have to be placed on the stack in
@@ -238,6 +295,9 @@ portBASE_TYPE xPortStartScheduler( void );
  */
 void vPortEndScheduler( void );
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* PORTABLE_H */
 
