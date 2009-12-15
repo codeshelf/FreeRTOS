@@ -93,12 +93,16 @@
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 <storageModule moduleId="org.eclipse.cdt.core.pathentry">
 <pathentry exported="true" include="C:/Program Files/Metrowerks/CW08 V3.1/lib/hc08c/include" kind="inc" path="" system="true"/>
 <pathentry base-path="FreeRTOS" exported="true" include="Source/include" kind="inc" path="" system="true"/>
 <pathentry base-path="FreeRTOS" exported="true" include="Demo/HCS08_CodeWarrior/CODE" kind="inc" path="" system="true"/>
 <pathentry base-path="FreeRTOS" exported="true" include="Demo/common/include" kind="inc" path="" system="true"/>
 <pathentry base-path="FreeRTOS" include="Demo/HCS08_CodeWarrior" kind="inc" path="" system="true"/>
+<pathentry base-path="FlyWeight" include="MC1322X/PLM/Interface" kind="inc" path="" system="true"/>
+<pathentry base-path="FlyWeight" include="MC1322X/PLM/LibInterface" kind="inc" path="" system="true"/>
 <pathentry exported="true" kind="mac" name="configUSE_PREEMPTION" path="" value="1"/>
 <pathentry exported="true" kind="mac" name="configUSE_IDLE_HOOK" path="" value="1"/>
 <pathentry exported="true" kind="mac" name="INCLUDE_vTaskPrioritySet" path="" value="1"/>
@@ -110,11 +114,12 @@
 <pathentry exported="true" kind="mac" name="INCLUDE_vTaskDelay" path="" value="1"/>
 <pathentry exported="true" kind="mac" name="configUSE_16_BIT_TICKS" path="" value="1"/>
 <pathentry exported="true" kind="mac" name="heapBYTE_ALIGNMENT_MASK" path="" value="1"/>
+<pathentry kind="mac" name="__arm" path="" value=""/>
+<pathentry kind="mac" name="__interwork" path="" value=""/>
 <pathentry kind="src" path=""/>
 <pathentry kind="out" path=""/>
 <pathentry kind="con" path="org.eclipse.cdt.make.core.DISCOVERED_SCANNER_INFO"/>
 </storageModule>
-<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 </cconfiguration>
 </storageModule>
 </cproject>

@@ -310,13 +310,14 @@ static void prvSetupTimerInterrupt(void) {
 	//tmrComparatorStatusCtrl.bitFields.CL1 = 0x01;
 	TmrSetCompStatusControl(gTmr0_c, &tmrComparatorStatusCtrl);
 
-	tmrConfig.tmrOutputMode = gTmrToggleOF_c;
-	tmrConfig.tmrCoInit = FALSE; /*co-chanel counter/timers can not force a re-initialization of this counter/timer*/
-	tmrConfig.tmrCntDir = FALSE; /*count-up*/
-	tmrConfig.tmrCntLen = TRUE; /*count until compare*/
-	tmrConfig.tmrCntOnce = FALSE; /*count repeatedly*/
-	tmrConfig.tmrSecondaryCntSrc = gTmrSecondaryCnt0Input_c; /*secondary count source not needed*/
-	tmrConfig.tmrPrimaryCntSrc = gTmrPrimaryClkDiv1_c; /*primary count source is IP BUS clock divide by 8 prescaler*/
+	tmrConfig.uintValue = 0x0000;
+	tmrConfig.bitFields.tmrOutputMode = gTmrToggleOF_c;
+	tmrConfig.bitFields.tmrCoInit = FALSE; /*co-chanel counter/timers can not force a re-initialization of this counter/timer*/
+	tmrConfig.bitFields.tmrCntDir = FALSE; /*count-up*/
+	tmrConfig.bitFields.tmrCntLen = TRUE; /*count until compare*/
+	tmrConfig.bitFields.tmrCntOnce = FALSE; /*count repeatedly*/
+	tmrConfig.bitFields.tmrSecondaryCntSrc = gTmrSecondaryCnt0Input_c; /*secondary count source not needed*/
+	tmrConfig.bitFields.tmrPrimaryCntSrc = gTmrPrimaryClkDiv1_c; /*primary count source is IP BUS clock divide by 8 prescaler*/
 	TmrSetConfig(gTmr0_c, &tmrConfig);
 
 	/* Config timer to raise interrupts each 1 ms */
