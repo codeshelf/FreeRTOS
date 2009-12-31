@@ -230,6 +230,8 @@ static __arm __irq void vPortNonPreemptiveTick( void )
  keyword. */
 void vPortPreemptiveTick(void);
 void vPortPreemptiveTick(void) {
+	TmrErr_t error;
+
 	/* Increment the tick counter. */
 	vTaskIncrementTick();
 
@@ -241,28 +243,28 @@ void vPortPreemptiveTick(void) {
 	/* Ready for the next interrupt. */
 	// Reset the timer and clear the TCF.
 
-	// Don't stat the timer yet.
-	TmrSetMode(gTmr0_c, gTmrNoOperation_c);
-
-	// Reset the counter, so we get a full count on the next run.
-	SetCntrVal(gTmr0_c, 0);
+//	// Don't stat the timer yet.
+//	TmrSetMode(gTmr0_c, gTmrNoOperation_c);
+//
+//	// Reset the counter, so we get a full count on the next run.
+//	SetCntrVal(gTmr0_c, 0);
 
 	// Clear TCF, TOF, IEF and set TCFIE.
 	TmrStatusCtrl_t statusCtrl;
-	TmrGetStatusControl(gTmr0_c, &statusCtrl);
+	error = TmrGetStatusControl(gTmr0_c, &statusCtrl);
 	statusCtrl.bitFields.TCF = 0;
 	statusCtrl.bitFields.TOF = 0;
 	statusCtrl.bitFields.IEF = 0;
 	//statusCtrl.bitFields.TCFIE = 0;
-	TmrSetStatusControl(gTmr0_c, &statusCtrl);
+	error = TmrSetStatusControl(gTmr0_c, &statusCtrl);
 
-	TmrComparatorStatusCtrl_t tmrComparatorStatusCtrl;
-	TmrGetCompStatusControl(gTmr0_c, &tmrComparatorStatusCtrl);
-	tmrComparatorStatusCtrl.bitFields.TCF1 = 0;
-	tmrComparatorStatusCtrl.bitFields.TCF2 = 0;
-	TmrSetCompStatusControl(gTmr0_c, &tmrComparatorStatusCtrl);
-
-	TmrSetMode(gTmr0_c, gTmrCntRiseEdgPriSrc_c);
+//	TmrComparatorStatusCtrl_t tmrComparatorStatusCtrl;
+//	TmrGetCompStatusControl(gTmr0_c, &tmrComparatorStatusCtrl);
+//	tmrComparatorStatusCtrl.bitFields.TCF1 = 0;
+//	tmrComparatorStatusCtrl.bitFields.TCF2 = 0;
+//	TmrSetCompStatusControl(gTmr0_c, &tmrComparatorStatusCtrl);
+//
+//	TmrSetMode(gTmr0_c, gTmrCntRiseEdgPriSrc_c);
 }
 
 #endif
@@ -295,18 +297,19 @@ static void prvSetupTimerInterrupt(void) {
 	TmrSetMode(gTmr0_c, gTmrNoOperation_c);
 
 	/* Register the callback executed when a timer interrupt occur */
-	TmrSetCallbackFunction(gTmr0_c, gTmrComp1Event_c, prvTmrCallback);
+	TmrSetCallbackFunction(gTmr0_c, gTmrCompEvent_c, prvTmrCallback);
 
 	/* The timer interrupt with then throw an SWI, so provide a handler for that too. */
 	//IntAssignHandler(gSupervisorException_c, vPortYieldProcessor);
 
 	tmrStatusCtrl.uintValue = 0x0000;
-	tmrStatusCtrl.bitFields.OEN = 1;
+	tmrStatusCtrl.bitFields.OEN = TRUE;;
+	tmrStatusCtrl.bitFields.TCFIE = TRUE;
 	TmrSetStatusControl(gTmr0_c, &tmrStatusCtrl);
 
 	tmrComparatorStatusCtrl.uintValue = 0x0000;
 	tmrComparatorStatusCtrl.bitFields.DBG_EN = 0x01;
-	tmrComparatorStatusCtrl.bitFields.TCF1EN = TRUE;
+	tmrComparatorStatusCtrl.bitFields.TCF1EN = FALSE;
 	//tmrComparatorStatusCtrl.bitFields.CL1 = 0x01;
 	TmrSetCompStatusControl(gTmr0_c, &tmrComparatorStatusCtrl);
 
