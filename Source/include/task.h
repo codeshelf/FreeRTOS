@@ -817,6 +817,18 @@ signed portBASE_TYPE xTaskIsTaskSuspended( xTaskHandle xTask );
  */
 portTickType xTaskGetTickCount( void );
 
+// JBW/GW - 16JUL13: Can't use xTaskTickCount in an ISR, because ExitCritical turns interrupts back on even if they were off.
+/**
+ * task. h
+ * <PRE>volatile portTickType xTaskGetTickCount( void );</PRE>
+ *
+ * @return The count of ticks since vTaskStartScheduler was called.
+ *
+ * \page xTaskGetTickCount xTaskGetTickCount
+ * \ingroup TaskUtils
+ */
+portTickType xTaskGetTickCountNoCritical( void );
+
 /**
  * task. h
  * <PRE>unsigned portSHORT uxTaskGetNumberOfTasks( void );</PRE>

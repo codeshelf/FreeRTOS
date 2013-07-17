@@ -1114,6 +1114,13 @@ portTickType xTicks;
 }
 /*-----------------------------------------------------------*/
 
+// JBW/GW - 16JUL13: Can't use xTaskTickCount in an ISR, because ExitCritical turns interrupts back on even if they were off.
+portTickType xTaskGetTickCountNoCritical( void )
+{
+	return xTickCount;
+}
+/*-----------------------------------------------------------*/
+
 unsigned portBASE_TYPE uxTaskGetNumberOfTasks( void )
 {
 unsigned portBASE_TYPE uxNumberOfTasks;
