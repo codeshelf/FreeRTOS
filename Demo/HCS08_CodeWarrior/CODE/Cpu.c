@@ -154,7 +154,7 @@ void Cpu_SetHighSpeed(void)
     }
   TickTimer_SetHigh();                 /* Set all beans in project to the high speed mode */
   UART_SetHigh();                      /* Set all beans in project to the high speed mode */
-  USB_SetHigh();                       /* Set all beans in project to the high speed mode */
+  UART_SetHigh();                       /* Set all beans in project to the high speed mode */
   MC13191_SetHigh();                   /* Set all beans in project to the high speed mode */
   PWM1_SetHigh();                      /* Set all beans in project to the high speed mode */
 }
@@ -304,7 +304,7 @@ void PE_low_level_init(void)
   /* ### Asynchro serial "UART" init code ... */
   UART_Init();
   /* ### Asynchro serial "USB" init code ... */
-  USB_Init();
+  UART_Init();
   /* ###  Synchro master "MC13191" init code ... */
   MC13191_Init();
   /* ### Programable pulse generation "PWM1" init code ... */

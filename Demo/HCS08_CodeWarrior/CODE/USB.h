@@ -95,18 +95,18 @@
       bool Break    : 1;               /* Break detect */
       bool LINSync  : 1;               /* LIN synchronization error */
     } errName;
-  } USB_TError;                        /* Error flags. For languages which don't support bit access is byte access only to error flags possible. */
+  } UART_TError;                        /* Error flags. For languages which don't support bit access is byte access only to error flags possible. */
 #endif
 
 #ifndef __BWUserType_USB_TComData
 #define __BWUserType_USB_TComData
-  typedef byte USB_TComData ;          /* User type for communication. Size of this type depends on the communication data witdh. */
+  typedef byte UART_TComData ;          /* User type for communication. Size of this type depends on the communication data witdh. */
 #endif
 
 #define USB_RTS_BUF_SIZE 1             /* Number of characters in rcv. buffer when RTS signal gets activated */
 
 
-byte USB_RecvChar(USB_TComData *Chr);
+byte UART_RecvChar(UART_TComData *Chr);
 /*
 ** ===================================================================
 **     Method      :  USB_RecvChar (bean AsynchroSerial)
@@ -147,7 +147,7 @@ byte USB_RecvChar(USB_TComData *Chr);
 ** ===================================================================
 */
 
-byte USB_SendChar(USB_TComData Chr);
+byte UART_SendChar(UART_TComData Chr);
 /*
 ** ===================================================================
 **     Method      :  USB_SendChar (bean AsynchroSerial)
@@ -221,7 +221,7 @@ word USB_GetCharsInTxBuf(void);
 ** ===================================================================
 */
 
-__interrupt void USB_InterruptRx(void);
+__interrupt void UART_InterruptRx(void);
 /*
 ** ===================================================================
 **     Method      :  USB_InterruptRx (bean AsynchroSerial)
@@ -233,7 +233,7 @@ __interrupt void USB_InterruptRx(void);
 ** ===================================================================
 */
 
-__interrupt void USB_InterruptTx(void);
+__interrupt void UART_InterruptTx(void);
 /*
 ** ===================================================================
 **     Method      :  USB_InterruptTx (bean AsynchroSerial)
@@ -245,7 +245,7 @@ __interrupt void USB_InterruptTx(void);
 ** ===================================================================
 */
 
-__interrupt void USB_InterruptError(void);
+__interrupt void UART_InterruptError(void);
 /*
 ** ===================================================================
 **     Method      :  USB_InterruptError (bean AsynchroSerial)
@@ -258,7 +258,7 @@ __interrupt void USB_InterruptError(void);
 */
 
 
-void USB_Init(void);
+void UART_Init(void);
 /*
 ** ===================================================================
 **     Method      :  USB_Init (bean AsynchroSerial)
@@ -271,7 +271,7 @@ void USB_Init(void);
 ** ===================================================================
 */
 
-void USB_SetHigh(void);
+void UART_SetHigh(void);
 /*
 ** ===================================================================
 **     Method      :  USB_SetHigh (bean AsynchroSerial)

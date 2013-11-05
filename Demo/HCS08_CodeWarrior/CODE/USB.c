@@ -87,7 +87,7 @@ static byte SerFlag;                   /* Flags for serial communication */
                                        /* Bit 2 - Char in RX buffer */
                                        /* Bit 3 - Full TX buffer */
 static bool EnMode;                    /* Enable/Disable SCI in speed mode */
-static USB_TComData BufferRead;        /* Input char for SCI commmunication */
+static UART_TComData BufferRead;        /* Input char for SCI commmunication */
 
 
 /*
@@ -163,7 +163,7 @@ static void HWEnDi(void)
 **                           method.
 ** ===================================================================
 */
-byte USB_RecvChar(USB_TComData *Chr)
+byte UART_RecvChar(UART_TComData *Chr)
 {
   byte Result = ERR_OK;                /* Return error code */
 
@@ -211,7 +211,7 @@ byte USB_RecvChar(USB_TComData *Chr)
 **                           ERR_TXFULL - Transmitter is full
 ** ===================================================================
 */
-byte USB_SendChar(USB_TComData Chr)
+byte UART_SendChar(UART_TComData Chr)
 {
   if(!EnMode)                          /* Is the device disabled in the actual speed CPU mode? */
     return ERR_SPEED;                  /* If yes then error */
@@ -288,9 +288,9 @@ word USB_GetCharsInTxBuf(void)
 #define ON_FULL_RX    2
 #define ON_RX_CHAR    4
 #define ON_IDLE_CHAR  8
-ISR(USB_InterruptRx)
+ISR(UART_InterruptRx)
 {
-  USB_TComData Data;                   /* Temporary variable for data */
+  UART_TComData Data;                   /* Temporary variable for data */
   byte StatReg = getReg(SCI2S1);
   byte OnFlags = 0;                    /* Temporary variable for flags */
 
@@ -328,7 +328,7 @@ ISR(USB_InterruptRx)
 */
 #define ON_FREE_TX  1
 #define ON_TX_CHAR  2
-ISR(USB_InterruptTx)
+ISR(UART_InterruptTx)
 {
   byte OnFlags = 0;                    /* Temporary variable for flags */
 
@@ -351,7 +351,7 @@ ISR(USB_InterruptTx)
 **         This method is internal. It is used by Processor Expert only.
 ** ===================================================================
 */
-ISR(USB_InterruptError)
+ISR(UART_InterruptError)
 {
   byte StatReg = getReg(SCI2S1);
   if(StatReg & (SCI2S1_OR_MASK|SCI2S1_NF_MASK|SCI2S1_FE_MASK|SCI2S1_PF_MASK)) { /* Is an error detected? */
@@ -374,7 +374,7 @@ ISR(USB_InterruptError)
 **         This method is internal. It is used by Processor Expert only.
 ** ===================================================================
 */
-void USB_Init(void)
+void UART_Init(void)
 {
   SerFlag = 0;                         /* Reset flags */
   /* SCI2C1: LOOPS=0,SCISWAI=0,RSRC=0,M=0,WAKE=0,ILT=0,PE=0,PT=0 */
@@ -383,7 +383,7 @@ void USB_Init(void)
   setReg8(SCI2C3, 0x00);               /* Disable error interrupts */ 
   /* SCI2C2: TIE=0,TCIE=0,RIE=0,ILIE=0,TE=0,RE=0,RWU=0,SBK=0 */
   setReg8(SCI2C2, 0x00);               /* Disable all interrupts */ 
-  USB_SetHigh();                       /* Initial speed CPU mode is high */
+  UART_SetHigh();                       /* Initial speed CPU mode is high */
 }
 
 /*
@@ -397,7 +397,7 @@ void USB_Init(void)
 **         This method is internal. It is used by Processor Expert only.
 ** ===================================================================
 */
-void USB_SetHigh(void)
+void UART_SetHigh(void)
 {
   EnMode = TRUE;                       /* Set the flag "device enabled" in the actual speed CPU mode */
   HWEnDi();                            /* Enable/disable device according to status flags */
