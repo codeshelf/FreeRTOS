@@ -102,8 +102,8 @@ __arm __interwork void vPortEnableInterruptsFromThumb( void );
 __arm __interwork void vPortEnterCritical( void );
 __arm __interwork void vPortExitCritical( void );
 
-#define portDISABLE_INTERRUPTS()	IntDisableAll()
-#define portENABLE_INTERRUPTS()		IntEnableAll()
+#define portDISABLE_INTERRUPTS()	IntDisableIRQ()
+#define portENABLE_INTERRUPTS()		IntEnableIRQ()
 #define portENTER_CRITICAL()		vPortEnterCritical()
 #define portEXIT_CRITICAL()			vPortExitCritical()
 /*-----------------------------------------------------------*/
